@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin-allow-popups">
+    <title>Healthtech Reminder System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Healthtech Reminder System Dashboard</h1>
+    </header>
+
+    <main>
+        <!-- Authentication Section -->
+        <section id="auth-section" class="active">
+            <div class="auth-container">
+                <button id="toggle-auth" class="toggle-btn">Switch to Signup</button>
+                
+                <!-- Login Form -->
+                <form id="login-form" class="auth-form">
+                    <h2>Login</h2>
+                    <div class="form-group">
+                        <label for="login-email">Email:</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password:</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+
+                <!-- Signup Form -->
+                <form id="signup-form" class="auth-form hidden">
+                    <h2>Signup</h2>
+                    <div class="form-group">
+                        <label for="signup-name">Full Name:</label>
+                        <input type="text" id="signup-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email:</label>
+                        <input type="email" id="signup-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password:</label>
+                        <input type="password" id="signup-password" required>
+                    </div>
+                    <button type="submit">Signup</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="hidden">
+            <div class="dashboard-header">
+                <h2>Dashboard</h2>
+                <div class="header-buttons">
+                    <div class="google-calendar-section">
+                        <p id="google-auth-message">Loading Google Calendar integration...</p>
+                        <button id="authorize-button" class="auth-btn" style="display: none;">Connect Google Calendar</button>
+                        <button id="signout-button" class="auth-btn" style="display: none;">Disconnect Calendar</button>
+                    </div>
+                    <button id="logout-btn" class="logout-btn">Logout</button>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <!-- Add New Doctor Form -->
+                <section class="form-section">
+                    <h3>Add New Doctor</h3>
+                    <form id="add-doctor-form">
+                        <div class="form-group">
+                            <label for="doctor-name">Name:</label>
+                            <input type="text" id="doctor-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="doctor-clinic">Clinic Name:</label>
+                            <input type="text" id="doctor-clinic" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="doctor-email">Email:</label>
+                            <input type="email" id="doctor-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="doctor-phone">Phone Number:</label>
+                            <input type="tel" id="doctor-phone" required>
+                        </div>
+                        <button type="submit">Add Doctor</button>
+                    </form>
+                </section>
+
+                <!-- Add New Patient Form -->
+                <section class="form-section">
+                    <h3>Add New Patient</h3>
+                    <form id="add-patient-form">
+                        <div class="form-group">
+                            <label for="patient-name">Name:</label>
+                            <input type="text" id="patient-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="patient-phone">Phone Number:</label>
+                            <input type="tel" id="patient-phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="patient-email">Email:</label>
+                            <input type="email" id="patient-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Notification Preferences:</label>
+                            <div class="checkbox-group">
+                                <label>
+                                    <input type="checkbox" id="notify-sms" checked>
+                                    SMS Notifications
+                                </label>
+                                <label>
+                                    <input type="checkbox" id="notify-whatsapp" checked>
+                                    WhatsApp Notifications
+                                </label>
+                                <label>
+                                    <input type="checkbox" id="notify-email" checked>
+                                    Email Notifications
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit">Add Patient</button>
+                    </form>
+                </section>
+
+                <!-- Add New Appointment Form -->
+                <section class="form-section">
+                    <h3>Add New Appointment</h3>
+                    <form id="add-appointment-form">
+                        <div class="form-group">
+                            <label for="appointment-patient">Patient Name:</label>
+                            <select id="appointment-patient" required>
+                                <option value="">Select Patient</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="appointment-doctor">Doctor Name:</label>
+                            <select id="appointment-doctor" required>
+                                <option value="">Select Doctor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="appointment-time">Appointment Time:</label>
+                            <input type="datetime-local" id="appointment-time" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="appointment-type">Type:</label>
+                            <input type="text" id="appointment-type" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reminder-days">Remind me (days before):</label>
+                            <input type="number" id="reminder-days" min="1" max="14" value="2" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="appointment-notes">Notes:</label>
+                            <textarea id="appointment-notes"></textarea>
+                        </div>
+                        <button type="submit">Add Appointment</button>
+                    </form>
+                </section>
+
+                <!-- Upcoming Appointments Section -->
+                <section class="appointments-section">
+                    <h3>Upcoming Appointments</h3>
+                    <div class="appointments-list">
+                        <table id="appointments-table">
+                            <thead>
+                                <tr>
+                                    <th>Patient</th>
+                                    <th>Doctor</th>
+                                    <th>Time</th>
+                                    <th>Type</th>
+                                    <th>Notes</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Appointments will be dynamically added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+    <script src="script.js"></script>
+</body>
+</html>
